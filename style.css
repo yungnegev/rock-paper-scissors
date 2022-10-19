@@ -1,0 +1,81 @@
+body {
+
+    background-image: url('./images/background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: -apple-system, Roboto, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    margin: 30;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    box-sizing: border-box;
+
+}
+
+/* Logo */
+#logo-container{
+    align-content: start;
+    justify-content: start;
+    flex-basis: 100%;    
+    width: 100%;
+    margin: 30px;
+}
+
+
+/* Icons */
+
+
+.icons {
+    width: 160px;
+    height: 160px;
+    padding-left: 30px;
+    padding-right: 30px;
+    transition: all .1s ease;
+    
+}
+
+#rps-container{
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chosen {
+    transform: scale(1.1);
+}
+
+/* Computer pick */
+
+#comp-container{
+    display: flex;
+    margin-top: 50px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1D2021;
+    padding: 20px;
+    max-height: 100px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+/* Scoreboard */
+
+#score-container{
+    display: flex;
+    margin-top: 50px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #1D2021;
+    padding: 20px;
+}
+
+#player-score{
+    padding-right: 30px;
+}
+#computer-score{
+    padding-right: 30px;
+}

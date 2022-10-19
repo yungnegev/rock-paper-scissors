@@ -5,7 +5,17 @@
 let computer_wins = 0
 let player_wins = 0
 let draws = 0 
-let options = {rock:'rock', paper:'paper', scissors:'scissors'}
+
+const body = document.body
+const rock = document.querySelector("#rock")
+const paper = document.querySelector("#paper")
+const scissors = document.querySelector("#scissors")
+
+let yourScore = document.querySelector("#player-score")
+let computerScore = document.querySelector("#computer-score")
+let drawsScore = document.querySelector("#draws-score")
+let compDiv = document.querySelector("#comp-container")
+
 
 //Get computer choice:
 
@@ -22,52 +32,68 @@ function getComputerChoice(){
     }
 }
 
-//gettign player input:
+// getting player input and launching the game:
 
-function getPlayerChoice(){
-    choice = window.prompt('Type Rock/Paper/Scissors or Q to quit: ').toLowerCase()
-    return choice
-}
+rock.addEventListener('click', () => playRound(rock.id))
+paper.addEventListener('click', () => playRound(paper.id))
+scissors.addEventListener('click', () => playRound(scissors.id))
+
 
 // the game:
 
-function playgame(){
-      
-    while (true){
-
-        player_input = getPlayerChoice()
-        computer_pick = getComputerChoice()
+function playRound(playerSelection){
+    
+    let player_input = playerSelection
+    let computer_pick = getComputerChoice()
         
-        console.log('You chose: ' + player_input)
-        console.log('The computer chose: ' + computer_pick)
+    console.log('You chose: ' + player_input)
+    console.log('The computer chose: ' + computer_pick)
         
-        if(player_input == 'q'){
-            console.log(`You won ${player_wins} times.`)
-            console.log(`The computer won ${computer_wins} times.`)
-            console.log(`Draws:  ${draws} `)
-            console.log('Goodbye!')
-            break
-        }else if(player_input in options == false){
-            console.log('Sorry that is not a valid input')
-            continue
-        }else if(player_input == computer_pick){
-            console.log('It\'s a draw :/')
-            draws++
-        }else if(player_input == 'rock' && computer_pick == 'scissors'){
-            console.log('You won!')
-            player_wins++
-        }else if(player_input == 'scissors' && computer_pick == 'paper'){
-            console.log('You won!')
-            player_wins++
-        }else if(player_input == 'paper' && computer_pick == 'rock'){
-            console.log('You won!')
-            player_wins++
-        }else{
-            console.log('You lost :(')
-            computer_wins++
-        }
+    
+    if(player_input == computer_pick){
+        console.log('It\'s a draw :/')
+        draws++
+    }else if(player_input == 'rock' && computer_pick == 'scissors'){
+        console.log('You won!')
+        player_wins++
+    }else if(player_input == 'scissors' && computer_pick == 'paper'){
+        console.log('You won!')
+        player_wins++
+    }else if(player_input == 'paper' && computer_pick == 'rock'){
+        console.log('You won!')
+        player_wins++
+    }else{
+        console.log('You lost :(')
+        computer_wins++
     }
+
+    let result = `Computer chose: <img src="./images/${computer_pick}.png" height="100"> `
+    
+    compDiv.innerHTML = result
+    yourScore.innerText = `Your score: ${player_wins}`
+    computerScore.innerText = `Computer score: ${computer_wins}`
+    drawsScore.innerText = `Draws: ${draws}`
 }
 
-playgame()
+
+
+// Animations
+
+// (adding "chosen" which is a class with a transition css property)
+rock.addEventListener('click', () => rock.classList.add("chosen"))
+paper.addEventListener('click', () => paper.classList.add("chosen"))
+scissors.addEventListener('click', () => scissors.classList.add("chosen"))
+
+// (creating a function which emoves that class)
+function removeTransition(e) {
+
+    if (e.propertyName !== 'transform') return 
+    this.classList.remove('chosen')
+}
+
+// (once the thransition happens call the function to remove it)
+rock.addEventListener('transitionend' , removeTransition)
+paper.addEventListener('transitionend' , removeTransition)
+scissors.addEventListener('transitionend' , removeTransition)
+
 
